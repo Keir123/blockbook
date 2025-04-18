@@ -5,7 +5,7 @@ local modem = component.modem
 local serialization = require("serialization")
 local name="NULL"
 
-ServerAddress = "04a06fa8-e415-4c7b-b32e-d1cfd0c9a97a"
+ServerAddress = ""
 print(component.modem.address)
 
 modem.open(999)
@@ -31,6 +31,26 @@ function makePost(post)
     local outMessage = {"MAKEPOST",name,post}
     modem.send(ServerAddress,999,serialization.serialize(outMessage))
 end
+
+function getServerIp()
+    modem.broadcast(999,serialization.serialize({"LOCATEBLOCKBOOKSERVER"}))
+    local response=true
+    while response do
+        local _, _, from, port, _, message = event.pull("modem_message")
+        print("Recived: " .. tostring(message) .. "from" .. tostring(from))
+        local inMessage = serialization.unserialize(tostring(message))
+        if (inMessage[1]=="BLOCKBOOKADDRESS") then
+            response=false
+            ServerAddress=inMessage[2]
+        end
+    end
+end
+
+function drawPost()
+end
+
+
+getServerIp()
 term.write("Enter Username: ")
 name = term.read()
 
