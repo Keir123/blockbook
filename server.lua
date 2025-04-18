@@ -23,6 +23,10 @@ while exit do
     local inMessage = serialization.unserialize(tostring(message))
     print("Recived: " .. inMessage[1] .. "from" .. tostring(from))
 
+    if inMessage[1]=="LOCATEBLOCKBOOKSERVER" then
+        modem.send(from,999,serialization.serialize({"BLOCKBOOKADDRESS",component.modem.address}))
+    end
+
     if inMessage[1]=="LOGIN" then
         
     end
