@@ -35,6 +35,6 @@ while exit do
         modem.send(from,999,serialization.serialize(messageHistory))
     end
     if inMessage[1]== "MAKEPOST" then
-        table.insert(messageHistory,{inMessage[2],inMessage[3]})
+        table.insert(messageHistory,1,{inMessage[2],inMessage[3]})
     end
 end
