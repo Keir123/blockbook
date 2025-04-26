@@ -10,6 +10,7 @@ local messageHistory = {}
 local accounts = {}
 
 print(component.modem.address)
+modem.setStrength(9999)
 
 
 modem.open(999)
