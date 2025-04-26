@@ -14,6 +14,8 @@ local postOffset = 0
 ServerAddress = ""
 print(component.modem.address)
 
+modem.setStrength(9999)
+
 modem.open(999)
 
 
