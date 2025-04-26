@@ -89,10 +89,10 @@ function drawCreateView()
     print()
     print("Leave empty to go back")
     local postContent = term.read()
+    postContent= string.sub(postContent,1,-2)
     if postContent=="" then
         return
     end
-    postContent= string.sub(postContent,1,-2)
     makePost(postContent)
 end
 
